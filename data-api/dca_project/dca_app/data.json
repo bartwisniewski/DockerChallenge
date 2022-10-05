@@ -1,0 +1,22 @@
+[
+  {
+    "model":"dca_app.Patient",
+    "pk":1,
+    "fields":{
+      "pesel": 1111,
+      "first_name":"Bart",
+      "surname":"Wis",
+      "age": 33
+    }
+  },
+  {
+    "model":"dca_app.Patient",
+    "pk":2,
+    "fields":{
+      "pesel": 2222,
+      "first_name":"Patient",
+      "surname":"Zero",
+      "age": 99
+    }
+  }
+]
