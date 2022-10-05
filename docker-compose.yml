@@ -1,0 +1,48 @@
+services:
+  web:
+    build: ./web
+
+    ports:
+      - "8000:8000"
+    networks:
+      - network_front
+      - network_back
+  data-api:
+    build: ./data-api
+    ports:
+      - "8000:8001"
+    networks:
+      - network_back
+  web-db:
+    image: postgres:11
+    container_name: data-db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=pg_user
+      - POSTGRES_DB=pg
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - web-db:/data/postgres
+    networks:
+      - network_back
+  data-db:
+    image: postgres:11
+    container_name: data-db
+    ports:
+      - 5432:5433
+    environment:
+      - POSTGRES_USER=pg_user
+      - POSTGRES_DB=pg
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - data-db:/data/postgres
+    networks:
+      - network_back
+networks:
+  network_front:
+    driver: bridge
+  network_back:
+    driver: bridge
+    internal: true
+    
