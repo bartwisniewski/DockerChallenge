@@ -1,0 +1,38 @@
+{% extends 'dcw_app/header.html' %}
+
+<!--Block content goes below-->
+
+
+  {% block content %}
+
+    <div class="box">
+    <form method="get" action="{% url 'index' %}">
+      <div class="field">
+        <label class="label">PESEL</label>
+        <div class="control">
+          <input class="input"  id="pesel" type="text" placeholder="Enter patient PESEL number" name="pesel">
+        </div>
+      </div>
+      <div class="control">
+        <button type="submit" class="button is-primary">Get data</button>
+      </div>
+    </form>
+      {% if pesel %}
+      <table class="table">
+          <tbody>
+            <tr><th>PESEL</th><td>{{pesel}}</td></tr>
+            <tr><th>First name</th><td>{{first_name}}</td></tr>
+            <tr><th>Surname</th><td>{{surname}}</td></tr>
+            <tr><th>Age</th><td>{{age}}</td></tr>
+      </table>
+      {% endif %}
+
+    </div>
+
+
+    {% if user.is_authenticated %}
+    <div class="buttons">
+      <a class="is-link" href="{% url 'logout' %}">Logout</a>
+    </div>
+    {% endif %}
+  {% endblock %}

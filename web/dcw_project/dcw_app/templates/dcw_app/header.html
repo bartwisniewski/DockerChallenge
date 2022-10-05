@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+      <title>Docker Challenge Web</title>
+  </head>
+  <body>
+
+    <nav class="level">
+      <div class="level-left"></div>
+      <div class="level-right">
+        {% if user.is_authenticated %}
+          <p class="level-item"><span class="mr-1">Welcome, {{ user.get_username }}. You can use the app now. </span><a class="is-link" href="{% url 'logout' %}">Logout</a></p>
+        {% else %}
+          <p class="level-item">Welcome, please log in to use the app</p>
+        {% endif %}
+      </div>
+    </nav>
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <p class="title">
+          Docker Challenge
+        </p>
+        <p class="subtitle">
+          Get patients data from ID
+        </p>
+      </div>
+    </section>
+      {% block content %}
+
+      {% endblock %}
+
+
+  </body>
+</html>
