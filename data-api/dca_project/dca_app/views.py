@@ -1,10 +1,16 @@
 from rest_framework import status
+from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Patient
 from .serializers import PatientSerializer
 
-# Create your views here.
+
+class PatientDetail(generics.RetrieveAPIView):
+    lookup_field = 'pesel'
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer
+    # permission_classes = [IsAdminUser]
 
 
 @api_view(['GET'])

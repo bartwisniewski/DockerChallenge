@@ -1,12 +1,10 @@
 from django.urls import path
 from django.urls import include
-from django.contrib.auth import views as auth_views
-
 
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('', include('django.contrib.auth.urls')),
-    path('register', views.register_request, name="register")
+    path('register', views.ContactFormView.as_view(), name="register")
 ]

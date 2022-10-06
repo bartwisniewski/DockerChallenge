@@ -1,4 +1,4 @@
-{% extends 'dcw_app/header.html' %}
+{% extends 'dcw_app/base.html' %}
 
 <!--Block content goes below-->
 
@@ -17,16 +17,18 @@
         <button type="submit" class="button is-primary">Get data</button>
       </div>
     </form>
-      {% if pesel %}
+      {% if patient_data %}
       <table class="table">
           <tbody>
-            <tr><th>PESEL</th><td>{{pesel}}</td></tr>
-            <tr><th>First name</th><td>{{first_name}}</td></tr>
-            <tr><th>Surname</th><td>{{surname}}</td></tr>
-            <tr><th>Age</th><td>{{age}}</td></tr>
+            <tr><th>PESEL</th><td>{{patient_data.pesel}}</td></tr>
+            <tr><th>First name</th><td>{{patient_data.first_name}}</td></tr>
+            <tr><th>Surname</th><td>{{patient_data.surname}}</td></tr>
+            <tr><th>Age</th><td>{{patient_data.age}}</td></tr>
       </table>
       {% endif %}
-
+      {% if data_error %}
+        <p class="help is-danger">Problem with getting data</p>
+      {% endif %}
     </div>
 
 
