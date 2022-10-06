@@ -1,42 +1,74 @@
 services:
   web:
     build: ./web
+    container_name: web
+    environment:
+      - DJANGO_SETTINGS_MODULE=dcw_project.settings
+    entrypoint: [ "/bin/sh", "-c" ]
+    command:
+      - |
+        python3 manage.py makemigrations
+        python3 manage.py migrate
+        python3 manage.py runserver 0.0.0.0:8000
 
+    depends_on:
+      web-db:
+        condition: service_healthy
     ports:
       - "8000:8000"
     networks:
       - network_front
       - network_back
+
   data-api:
     build: ./data-api
-    ports:
-      - "8000:8001"
+    container_name: data-api
+    environment:
+      - DJANGO_SETTINGS_MODULE=dca_project.settings
+    entrypoint: [ "/bin/sh", "-c" ]
+    command:
+      - |
+        python manage.py makemigrations
+        python manage.py migrate
+        python manage.py loaddata data.json
+        python manage.py runserver 0.0.0.0:8000
+        
+
+    depends_on:
+      data-db:
+        condition: service_healthy
     networks:
       - network_back
+
   web-db:
-    image: postgres:11
-    container_name: data-db
-    ports:
-      - 5432:5432
+    image: postgres:13
+    container_name: web-db
     environment:
-      - POSTGRES_USER=pg_user
-      - POSTGRES_DB=pg
-      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: pg_isready -U postgres -d postgres
+      interval: 10s
+      timeout: 3s
+      retries: 3
     volumes:
-      - web-db:/data/postgres
+      - ./web-db/:/var/lib/postgresql/data/
     networks:
       - network_back
+
   data-db:
-    image: postgres:11
+    image: postgres:13
     container_name: data-db
-    ports:
-      - 5432:5433
     environment:
-      - POSTGRES_USER=pg_user
-      - POSTGRES_DB=pg
-      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: pg_isready -U postgres -d postgres
+      interval: 10s
+      timeout: 3s
+      retries: 3
     volumes:
-      - data-db:/data/postgres
+      - ./data-db/:/var/lib/postgresql/data/
     networks:
       - network_back
 networks:
@@ -45,4 +77,3 @@ networks:
   network_back:
     driver: bridge
     internal: true
-    

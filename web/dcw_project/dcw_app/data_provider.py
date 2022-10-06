@@ -2,7 +2,7 @@ import requests
 import jwt
 from django.conf import settings
 
-API_URL = 'http://127.0.0.1:8001'
+API_URL = 'http://data-api:8000'
 ENDPOINT = 'patient'
 
 

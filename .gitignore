@@ -131,3 +131,7 @@ dmypy.json
 # PyCharm files
 .idea/
 
+# DB Volumes
+data-db/
+web-db/
+
