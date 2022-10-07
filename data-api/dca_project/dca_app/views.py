@@ -2,8 +2,8 @@ import jwt
 
 from rest_framework import generics
 from django.conf import settings
-from .models import Patient
-from .serializers import PatientSerializer
+from dca_app.models import Patient
+from dca_app.serializers import PatientSerializer
 
 
 class PatientDetail(generics.RetrieveAPIView):

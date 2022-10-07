@@ -1,4 +1,4 @@
-from .models import Patient
+from dca_app.models import Patient
 from rest_framework import serializers
 
 

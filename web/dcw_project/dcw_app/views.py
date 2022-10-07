@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django.utils.decorators import method_decorator
 
-from .data_provider import get_patient_data
+from dcw_app.data_provider import get_patient_data
 
 
 @method_decorator(login_required, name='dispatch')

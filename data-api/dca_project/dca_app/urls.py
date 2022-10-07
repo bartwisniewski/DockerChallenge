@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from dca_app.views import PatientDetail
 
 urlpatterns = [
-    path('patients/<str:pesel>', views.PatientDetail.as_view()),
+    path('patients/<str:pesel>', PatientDetail.as_view()),
 ]
