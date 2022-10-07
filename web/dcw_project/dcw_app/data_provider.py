@@ -1,8 +1,10 @@
+import os
 import requests
 import jwt
+
 from django.conf import settings
 
-API_URL = 'http://data-api:8000'
+API_HOST = 'http://'+os.environ['API_HOST_NAME']+':'+os.environ['API_PORT_NAME']
 ENDPOINT = 'patient'
 
 
@@ -13,7 +15,7 @@ def request_with_token(url):
 
 
 def get_patient_data(id: int) -> dict:
-    url = API_URL + '/' + ENDPOINT + '/' + id
+    url = API_HOST + '/' + ENDPOINT + '/' + str(id)
     response = request_with_token(url)
     if response:
         return response.json()

@@ -1,15 +1,17 @@
 services:
   web:
     build: ./web
-    container_name: web
+    container_name: ${WEB_NAME}
     environment:
       - DJANGO_SETTINGS_MODULE=dcw_project.settings
+      - API_HOST_NAME=${API_NAME}
+      - API_PORT_NAME=${API_PORT}
     entrypoint: [ "/bin/sh", "-c" ]
     command:
       - |
         python3 manage.py makemigrations
         python3 manage.py migrate
-        python3 manage.py runserver 0.0.0.0:8000
+        python3 manage.py runserver 0.0.0.0:${WEB_PORT}
 
     depends_on:
       web-db:
@@ -22,7 +24,7 @@ services:
 
   data-api:
     build: ./data-api
-    container_name: data-api
+    container_name: ${API_NAME}
     environment:
       - DJANGO_SETTINGS_MODULE=dca_project.settings
     entrypoint: [ "/bin/sh", "-c" ]
@@ -31,7 +33,7 @@ services:
         python manage.py makemigrations
         python manage.py migrate
         python manage.py loaddata data.json
-        python manage.py runserver 0.0.0.0:8000
+        python manage.py runserver 0.0.0.0:${API_PORT}
         
 
     depends_on:

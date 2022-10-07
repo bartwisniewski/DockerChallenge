@@ -3,7 +3,7 @@
     "model":"dca_app.Patient",
     "pk":1,
     "fields":{
-      "pesel": 1111,
+      "pesel": 89052800001,
       "first_name":"Bart",
       "surname":"Wis",
       "age": 33
@@ -13,7 +13,7 @@
     "model":"dca_app.Patient",
     "pk":2,
     "fields":{
-      "pesel": 2222,
+      "pesel": 89052800002,
       "first_name":"Patient",
       "surname":"Zero",
       "age": 99
