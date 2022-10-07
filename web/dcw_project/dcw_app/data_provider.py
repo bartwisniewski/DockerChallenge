@@ -4,8 +4,10 @@ import jwt
 
 from django.conf import settings
 
-API_HOST = 'http://'+os.environ['API_HOST_NAME']+':'+os.environ['API_PORT_NAME']
-ENDPOINT = 'patient'
+API_HOST_NAME = os.environ["API_HOST_NAME"]
+API_PORT = os.environ["API_PORT"]
+API_URL = f'http://{API_HOST_NAME}:{API_PORT}'
+ENDPOINT = 'patients'
 
 
 def request_with_token(url):
@@ -15,7 +17,7 @@ def request_with_token(url):
 
 
 def get_patient_data(id: int) -> dict:
-    url = API_HOST + '/' + ENDPOINT + '/' + str(id)
+    url = f'{API_URL}/{ENDPOINT}/{str(id)}'
     response = request_with_token(url)
     if response:
         return response.json()
