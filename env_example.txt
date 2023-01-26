@@ -1,0 +1,9 @@
+WEB_PORT=8000
+WEB_NAME = "web"
+WEB_DB_NAME = "web-db"
+API_PORT=8000
+API_NAME = "data-api"
+DATA_DB_NAME = "data-db"
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password
+POSTGRES_DB=postgres
